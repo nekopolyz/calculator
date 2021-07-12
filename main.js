@@ -1,4 +1,7 @@
-const buttons = document.querySelectorAll('button')
+// const { number } = require("yargs");
+
+const nums = document.querySelectorAll('.num')
+const operator = document.querySelectorAll('.operator')
 
 const add = function(a,b){
     return a + b;
@@ -21,20 +24,22 @@ const operate = function(operator,num1,num2){
     return operator
 }
 
-const display = function(){
-
-}
-
-
-buttons.forEach((button)=>{
-    button.addEventListener('click',returnValue)});
 
 let storeNum = '';
-let screen = document.querySelector('.input');
-function returnValue(number){
+let secondNum = '';
+let display = document.querySelector('.input');
+
+nums.forEach((num)=>{
+    num.addEventListener('click',returnValue)});
+
+function returnValue(e){
     // let button = n.target.id;
     // screen.textContent=button;
-    storeNum += number.target.id;
-    screen.textContent = storeNum;
+    storeNum += e.target.id;
+    display.textContent = storeNum;
     console.log(storeNum);
 }
+
+
+
+    
