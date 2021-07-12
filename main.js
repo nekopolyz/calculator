@@ -1,7 +1,5 @@
 const buttons = document.querySelectorAll('button')
 
-
-
 const add = function(a,b){
     return a + b;
 }
@@ -28,17 +26,15 @@ const display = function(){
 }
 
 
-
 buttons.forEach((button)=>{
     button.addEventListener('click',returnValue)});
 
-
-
-function returnValue(n){
-    
-    let value = n.target.value;
-    let screen = document.querySelector('.input')
-    screen.textContent=value
-    console.log(value);
-    
+let storeNum = '';
+let screen = document.querySelector('.input');
+function returnValue(number){
+    // let button = n.target.id;
+    // screen.textContent=button;
+    storeNum += number.target.id;
+    screen.textContent = storeNum;
+    console.log(storeNum);
 }
