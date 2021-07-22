@@ -82,32 +82,8 @@ operators.forEach((operator => {
         display.textContent = storeNum + clickedOperator;
         // storeNum = '';
         
-        if (clickedOperator == '+' && secondNum != '' ){
-            const result = parseFloat(secondNum) + parseFloat(storeNum);
-            display.textContent = result;
-            console.log(result);
-            if (result){
-                storeNum = result;
-            }
-        }
-        else if (clickedOperator == '-' && secondNum != '') {
-            const result = parseFloat(secondNum) - parseFloat(storeNum);
-            display.textContent = result;
-            console.log(result);
-            if (result){
-                storeNum = result;
-            }
-        }
-        else if (clickedOperator == '×' && secondNum != ''){
-            const result = parseFloat(secondNum) * parseFloat(storeNum);
-            display.textContent = result;
-            console.log(result);
-            if (result){
-                storeNum = result;
-            }
-        }
-        else if (clickedOperator == '÷' && secondNum != ''){
-            const result = parseFloat(secondNum) / parseFloat(storeNum);
+        if (clickedOperator && secondNum !=''){
+            const result = operate(parseFloat(secondNum), parseFloat(storeNum), (clickedOperator))
             display.textContent = result;
             console.log(result);
             if (result){
@@ -118,9 +94,6 @@ operators.forEach((operator => {
         secondNum = storeNum;
         // storeNum = result;
         storeNum = '';
-        
- 
-       
         
     
         console.log(`SecondNum = ${secondNum}  storedNum = ${storeNum}`);
