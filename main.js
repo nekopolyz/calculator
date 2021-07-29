@@ -48,16 +48,18 @@ let clickedOperator = '';
 let secondclicked = '';
 let secondNum = '';
 let result = null;
+let currentDot = false;
 
 
-// Clear button
+// Clear button -- Reset everything
 clearBtn.addEventListener('click', clear);
 function clear() {
     storeNum = '';
     clickedOperator = '';
     secondNum = '';
-    result = '';
+    result = null;
     display.textContent = 0;
+    currentDot = false;
 }
 
 // Num Buttons
@@ -66,8 +68,22 @@ nums.forEach((num) => {
 });
 
 function returnValue(e) {
+
+    // Disable current dot if > 1
+    if (e.target.textContent === '.' && !currentDot) {
+        currentDot = true;
+
+        console.log(currentDot);
+
+    }
+    else if (e.target.textContent === '.' && currentDot) {
+        return;
+
+    }
+
     storeNum += e.target.id;
     display.textContent = storeNum;
+
 
 
     console.log(`${typeof (storeNum)} = ${storeNum} << storeNum`);
@@ -77,6 +93,9 @@ function returnValue(e) {
 // Operator buttons
 operators.forEach((operator => {
     operator.addEventListener('click', function (e) {
+        // restore dot
+        currentDot = false;
+
         if (secondNum !== '') {
             const result = operate(parseFloat(secondNum), parseFloat(storeNum), (clickedOperator))
             display.textContent = result;
@@ -103,7 +122,7 @@ operators.forEach((operator => {
 // press =
 
 const calculate = () => {
-    if (storeNum == ''){
+    if (storeNum == '') {
         return;
     }
     const result = operate(Number(secondNum), Number(storeNum), (clickedOperator));
@@ -113,6 +132,7 @@ const calculate = () => {
     console.log(`${typeof (result)} = ${result} << Check type`);
     storeNum = result;
     console.log(`storeNum  ${storeNum} <<< storeNum  result - pressed = >>>>`);
+    console.log(`${secondNum} << secondNum after result`);
 
 }
 
