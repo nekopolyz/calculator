@@ -45,6 +45,7 @@ const operate = function (num1, num2, operator) {
 // @ts-nocheck
 let storeNum = '';
 let clickedOperator = '';
+let secondclicked = '';
 let secondNum = '';
 let result = null;
 
@@ -53,7 +54,7 @@ let result = null;
 clearBtn.addEventListener('click', clear);
 function clear() {
     storeNum = '';
-    clickedOperator = undefined;
+    clickedOperator = '';
     secondNum = '';
     result = '';
     display.textContent = 0;
@@ -67,48 +68,44 @@ nums.forEach((num) => {
 function returnValue(e) {
     storeNum += e.target.id;
     display.textContent = storeNum;
-    
+
 
     console.log(`${typeof (storeNum)} = ${storeNum} << storeNum`);
- 
+
 }
 
 // Operator buttons
 operators.forEach((operator => {
     operator.addEventListener('click', function (e) {
-
-        clickedOperator = operator.textContent;        
-
-        display.textContent = storeNum + clickedOperator;
-        // storeNum = '';
-        
-        if (clickedOperator && secondNum !=''){
+        if (secondNum !== '') {
             const result = operate(parseFloat(secondNum), parseFloat(storeNum), (clickedOperator))
             display.textContent = result;
             console.log(result);
-            if (result){
-                storeNum = result;
-            }
+            storeNum = result;
         }
-        
+
+        clickedOperator = operator.textContent;
+
+        display.textContent = storeNum;
+
         secondNum = storeNum;
-        // storeNum = result;
         storeNum = '';
-        
-    
+
+
         console.log(`SecondNum = ${secondNum}  storedNum = ${storeNum}`);
         console.log(`${clickedOperator} << click operator`);
-        
 
     })
 }));
 
 
 
-// calculation 
+// press =
 
 const calculate = () => {
-    
+    if (storeNum == ''){
+        return;
+    }
     const result = operate(Number(secondNum), Number(storeNum), (clickedOperator));
     secondNum = '';
 
@@ -121,16 +118,8 @@ const calculate = () => {
 
 equalKey.addEventListener('click', calculate);
 
-function mathOperation(){
-    if (clickedOperator === '×'){
-        result = parseFloat(result) * parseFloat(storeNum);
-        display.textContent = result;
-        
-    }
-};
 
 
-  
 
 
 
