@@ -6,6 +6,7 @@ const operators = document.querySelectorAll('.operator');
 const equalKey = document.querySelector('.is-equals');
 const display = document.querySelector('.input');
 const clearBtn = document.querySelector('.is-clear');
+const keypads = document.querySelectorAll('.calc-button')
 
 
 const add = function (a, b) {
@@ -21,7 +22,7 @@ const multiply = function (a, b) {
 }
 
 const divide = function (a, b) {
-    return a / b;
+    return Math.round(a / b * 100) / 100;
 }
 
 const operate = function (num1, num2, operator) {
@@ -72,7 +73,6 @@ function returnValue(e) {
     // Disable current dot if > 1
     if (e.target.textContent === '.' && !currentDot) {
         currentDot = true;
-
         console.log(currentDot);
 
     }
@@ -83,8 +83,6 @@ function returnValue(e) {
 
     storeNum += e.target.id;
     display.textContent = storeNum;
-
-
 
     console.log(`${typeof (storeNum)} = ${storeNum} << storeNum`);
 
@@ -139,7 +137,13 @@ const calculate = () => {
 equalKey.addEventListener('click', calculate);
 
 
-
+document.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    document.getElementById(event.key).click();
+    if (event.keycode === 13){
+        document.getElementById('=').click();
+    }
+})
 
 
 
